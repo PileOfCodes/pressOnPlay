@@ -85,3 +85,17 @@
     <StudioFourthSection />
     <StudioLastSection />
 </template>
+
+<script setup lang="ts">
+import {usePlayerStore} from '@/store/Player'
+import {storeToRefs} from 'pinia'
+const playerStore = usePlayerStore()
+const {isPlaying, player} = storeToRefs(playerStore)
+
+onBeforeRouteLeave(() => {
+    if(isPlaying.value) {
+        player.value?.pause()
+        isPlaying.value = false
+    }
+})
+</script>

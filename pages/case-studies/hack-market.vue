@@ -64,12 +64,23 @@
 
 <script setup lang="ts">
 import gsap from 'gsap'
+import {usePlayerStore} from '@/store/Player'
+import {storeToRefs} from 'pinia'
 definePageMeta({
     layout: 'without-footer'
 })
 const hackContainer = ref()
 const router = useRouter()
 let ctx = ref()
+const playerStore = usePlayerStore()
+const {isPlaying, player} = storeToRefs(playerStore)
+
+onBeforeRouteLeave(() => {
+    if(isPlaying.value) {
+        player.value?.pause()
+        isPlaying.value = false
+    }
+})
 onMounted(() => {
     ctx.value = gsap.context(() => {
         let tl = gsap.timeline({

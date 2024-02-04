@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute left-2 bottom-[420px] md:bottom-[420px] transition-all duration-75 z-50" 
+    <div class="absolute left-2 bottom-[420px] md:bottom-[560px] transition-all duration-75 z-50" 
     :style="`transform: translateX(${mouseX}px)`" v-if="onHover">
         <template v-for="(image, index) in oneyImages" :key="index" >
             <div class="w-[140px] h-[80px] lg:w-[260px] lg:h-[160px]"  v-if="index == current">
@@ -81,7 +81,7 @@ watch([$viewport.breakpoint, mouseX], ([newBreakPoint, newMouseVal]) => {
 
 </script>
 
-<style>
+<style scoped>
 
 .oney {
     position: relative;

@@ -22,9 +22,9 @@
             <div  class="Tape__container__face Tape__container__face--back">
                 <div class="w-full h-full overflow-clip flex flex-col  md:flex-row md:items-center justify-center md:pl-[400px]">
                     <div class="text-[6rem] md:text-[12rem]">TAPE</div>
-                    <div class="md:absolute md:w-full leading-[20px] md:text-start md:pl-[150px] text-[24px] tracking-tight md:bottom-8">Amplify your worlds</div>
+                    <div class="md:absolute md:w-full leading-[20px] md:text-start md:pl-[20px] lg:pl-[100px] xl:pl-[150px] text-[24px] tracking-tight md:bottom-8">Amplify your worlds</div>
                 </div>
-                <div class="hidden absolute w-full lg:flex items-center justify-end pr-16 font-thin tracking-tight bottom-8">
+                <div class="hidden absolute w-full lg:flex items-center justify-end pr-16 xl:pr-24 font-thin tracking-tight bottom-8">
                     <div class="h-6">
                         <ClientOnly>
                             <Vue3Marquee :vertical="true" :duration="2" :clone="true" :direction="'reverse'">
@@ -49,7 +49,7 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style scoped>
 :root {
     --dark: #150c0f;
 }

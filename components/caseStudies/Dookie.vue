@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute left-2 bottom-[430px] md:bottom-[520px] transition-all duration-75 z-50" 
+    <div class="absolute left-2 bottom-[430px] md:bottom-[760px] transition-all duration-75 z-50" 
     :style="`transform: translateX(${mouseX}px)`" v-if="onHover">
         <template v-for="(image, index) in dookieImages" :key="index">
             <div class="w-[140px] h-[80px] lg:w-[260px] lg:h-[160px]"  v-if="index == current">

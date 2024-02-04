@@ -1,8 +1,7 @@
-<template>
-    
-</template>
+<template></template>
   
-<script setup>
+<script setup lang="ts">
+
 definePageMeta({
     layout: 'contact'
 })

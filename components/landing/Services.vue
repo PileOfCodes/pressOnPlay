@@ -7,12 +7,15 @@
             </div>
             <div class="flex flex-col md:gap-y-[500px]">
                 <div class="text-[2.5rem] w-[350px] md:w-[500px] leading-[45px] tracking-tighter" id="item-1">Music, sound and voice. Secretly designed to unlock a little love.</div>
-                <div class="" id="item-2">
+                <div class="hidden md:block" id="item-2">
                     <CustomeBtn btn-text="Learn More" />
                 </div>
             </div>
         </div>
-        <div>
+        <div class="md:hidden">
+
+        </div>
+        <div class="hidden md:block">
             <LandingServiceCarousel />
         </div>
     </div>
