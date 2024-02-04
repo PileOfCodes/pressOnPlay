@@ -1,5 +1,5 @@
 <template>
-    <div class="py-4 w-full lg:w-[200px] relative" id="item-3">
+    <div class="py-4 px-6 w-full lg:w-[200px] relative" id="item-3">
         <button class="w-full lg:w-[200px] p-6 rounded-[4px] border-[1px] border-black flex items-center justify-center" 
         :class="changeStyle ? 'bg-black text-white' : 'bg-white text-black'"
         @mouseenter="changeStyle = true" 

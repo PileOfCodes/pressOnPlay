@@ -1,10 +1,8 @@
 <template>
-    <div>
-        <LayoutHeader @send-header="input => getHeader(input)" @audioTrigger="(input : HTMLDivElement) => getAudioTrigger(input)" />
-        <!-- <StickyMenu :isLargeEnough="isLargeEnough" @menuAudioTrigger="(input : any) => getMenuAudioTrigger(input)"  /> -->
-        <slot/>
-        <LayoutFooter />
-    </div>
+    <LayoutHeader @send-header="input => getHeader(input)" @audioTrigger="(input : HTMLDivElement) => getAudioTrigger(input)" />
+        <StickyMenu :isLargeEnough="isLargeEnough" @menuAudioTrigger="(input : any) => getMenuAudioTrigger(input)"  />
+    <slot/>
+    <LayoutFooter />
 </template>
 
 <script setup lang="ts">

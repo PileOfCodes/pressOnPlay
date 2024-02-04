@@ -2,7 +2,7 @@
     <div v-if="showMenu" :class="showMenu ? 'showAnimateMenu' : ''" class="bg-black text-white">
         <MobileMenu :showMenu="showMenu" @send-audio-trigger="(input) => audioTrigger(input)" @send-show-menu="(input) => showMenu = input" />
     </div>
-    <div v-else class="fixed top-0 z-[99] left-[50%] translate-x-[-50%] overflow-hidden h-[100px]" :class="isHidden ? 'hideMenu' : 'showMenu'">
+    <div v-else class="fixed top-0 z-[99] left-[50%] translate-x-[-50%] overflow-hidden h-[100px]" :class="[isHidden ? 'hideMenu' : 'showMenu', showOnScroll ? 'showMenu' : 'hideMenu']">
         <div class="sideMenu">
             <svg preserveAspectRatio="none" viewBox="0 0 59 55" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M44.6973 8.17791L22.313 43.7756C17.9205 50.761 10.2475 55 1.99592 55H59.5V0C53.488 0 47.8976 3.08849 44.6973 8.17791Z" fill="white"></path></svg>
         </div>
@@ -30,11 +30,23 @@
 const emit = defineEmits(['menuAudioTrigger'])
 const props = defineProps(['isLargeEnough'])
 const isHidden = ref(true)
+const showOnScroll = ref(false)
 function audioTrigger(input: any) {
     emit('menuAudioTrigger', input)
 }
 const showMenu = ref(false)
 onMounted(() => {
+    let lastScrollTop = 0;
+    window.addEventListener("scroll", function(){
+        var st = window.scrollY || document.documentElement.scrollTop
+        if (st > lastScrollTop) {
+            showOnScroll.value = false
+        } else if (st < lastScrollTop) {
+            showOnScroll.value = true
+        }
+        lastScrollTop = st <= 0 ? 0 : st;
+    }, false);
+
     document.addEventListener('scroll', function() {
         if(window.scrollY > 250) {
             isHidden.value = false
