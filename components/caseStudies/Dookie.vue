@@ -12,11 +12,10 @@
             <div class="cstudies__container">
                 <div class="cstudies__container__face cstudies__container__face--front"></div>
                 <div class="cstudies__container__face cstudies__container__face--top">
-                    <div class="w-full h-full overflow-clip flex items-center justify-evenly">
-                        <div>
+                    <div class="text-nowrap text-clip w-full h-full overflow-clip flex items-center justify-evenly ">
+                        <div class="flex">
                             <span class="text-[4rem] lg:text-[12rem] md:text-[6rem]">D</span>
-                            <span class="inline-block w-12 h-12 md:w-16 md:h-16 lg:w-36 lg:h-36 bg-black rounded-full"></span>
-                            <span class="inline-block w-12 h-12 md:w-16 md:h-16 lg:w-36 lg:h-36 bg-black rounded-full ml-1"></span>
+                            <BouncingCircle  target="slug" />
                             <span class="text-[4rem] lg:text-[12rem] md:text-[6rem] tracking-tighter">KEY</span>
                         </div>
                         <div class="ml-12">
@@ -25,14 +24,13 @@
                     </div>
                 </div>
                 <div class="cstudies__container__face cstudies__container__face--back" ref="backFace" :class="onHover ? 'bg-sky-500 block' : 'bg-[#f4f5ef] hidden'">
-                    <NuxtLink to="/studio" class="w-full h-full overflow-clip flex items-center justify-between">
+                    <NuxtLink to="/studio" class="text-nowrap text-clip w-full h-full overflow-clip flex items-center justify-between">
                         <div ref="audioBox">
                             <ClientOnly>
                                 <Vue3Marquee :duration="9">
-                                    <div>
+                                    <div class="flex">
                                         <span class="text-[4rem] lg:text-[12rem] md:text-[6rem]">D</span>
-                                        <span class="inline-block w-12 h-12 md:w-16 md:h-16 lg:w-36 lg:h-36 bg-black rounded-full"></span>
-                                        <span class="inline-block w-12 h-12 md:w-16 md:h-16 lg:w-36 lg:h-36 bg-black rounded-full ml-1"></span>
+                                        <BouncingCircle  target="slug" />
                                         <span class="text-[4rem] lg:text-[12rem] md:text-[6rem] tracking-tighter">KEY</span>
                                     </div>
                                     <div class="ml-12">
@@ -78,6 +76,20 @@ watch([$viewport.breakpoint, mouseX], ([newBreakPoint, newMouseVal]) => {
         if(newMouseVal < 150) {
         current.value = 0
         }else if(newMouseVal > 150 && newMouseVal < 250){
+            current.value = 1
+        }else{
+            current.value = 2
+        }
+    }
+    if(newBreakPoint == 'xl') {
+        if(newMouseVal < 20) {
+            mouseX.value = 20
+        }else if(newMouseVal > 1070){
+            mouseX.value = 1070
+        }
+        if(newMouseVal < 350) {
+        current.value = 0
+        }else if(newMouseVal > 350 && newMouseVal < 850){
             current.value = 1
         }else{
             current.value = 2

@@ -7,7 +7,7 @@
         <div class="">
             <HeaderPlayer :is-vertical="false" @send-audio-trigger="audioTrigger" />
         </div>
-        <div v-if="isHidden" class="flex items-center w-[500px] justify-between text-[14px]">
+        <div  class="md:flex items-center w-[500px] justify-between text-[14px] hidden ">
             <div class="flex items-center gap-x-8">
                 <NuxtLink to="/studio" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Studio</NuxtLink>
                 <NuxtLink to="/case-studies" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Case studies</NuxtLink>
@@ -17,7 +17,7 @@
                 <NuxtLink to="/contact" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Contact</NuxtLink>
             </div>
         </div>
-        <div v-else class="hamburgger__menu" @click="showMenu = true">
+        <div  class="hamburgger__menu" @click="showMenu = true">
             <div class="hamburgger__menu__firstChild"></div>
             <div class="hamburgger__menu__secondChild"></div>
         </div>
@@ -31,7 +31,6 @@ const bgc = ref('bg-white')
 function audioTrigger(input : any) {
     emit('audioTrigger', input)
 }
-const isHidden = ref(false)
 const showMenu = ref(false)
 const header = ref<HTMLDivElement | null>(null)
 const {width} = useElementSize(header)
@@ -55,18 +54,16 @@ watchEffect(() => {
 watchEffect(() => {
     if(width.value > 800) {
         emit('sendHeader', true)
-        isHidden.value = true
         showMenu.value = false
     }else {
         emit('sendHeader', false)
-        isHidden.value = false
     }
 })
 </script>
 
 <style>
 .hamburgger__menu {
-    @apply w-12 h-2 relative flex flex-col items-center justify-between cursor-pointer
+    @apply w-12 h-2 relative flex flex-col items-center justify-between cursor-pointer md:hidden
 }
 .hamburgger__menu__firstChild {
     @apply w-12 h-[1px] rounded-sm bg-black 

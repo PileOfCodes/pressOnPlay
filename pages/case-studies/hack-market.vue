@@ -21,21 +21,21 @@
             </div>
         </div>
         <CaseStudiesPlayBoard />
-        <div class="py-8 px-5">
+        <div class="py-8 px-5" ref="container_1">
             <div class="text-[40px] sm:text-[80px] sm:pr-10 sm:leading-[100px]" style="font-weight: 900;">Crafting the sound of digital rebellion – one AirDrop at a time.</div>
             <div class="flex items-end justify-end">
-                <div class="mt-32 text-[14px] leading-[15px] w-[200px] sm:w-[300px]">In honor of Earth Day 2022, Press Play On Tape played its role in Back Market's 'Hack Market'. Our mission? Craft the sound engineering that gave voice to the ethos of reconditioned electronics. We harmonized voices advocating sustainable practices and fine-tuned the familiar sounds of AirDrop notifications, adding our characteristic vintage flair.</div>
+                <div class="mt-32 text-[14px] leading-[15px] w-[200px] sm:w-[300px]" id="item1">In honor of Earth Day 2022, Press Play On Tape played its role in Back Market's 'Hack Market'. Our mission? Craft the sound engineering that gave voice to the ethos of reconditioned electronics. We harmonized voices advocating sustainable practices and fine-tuned the familiar sounds of AirDrop notifications, adding our characteristic vintage flair.</div>
             </div>
         </div>
     </div>
     <CaseStudiesAdSection>
         <template #header>
-            <div class="w-full flex gap-x-2 md:gap-x-32 items-start" ref="container-1">
+            <div class="w-full flex gap-x-2 md:gap-x-32 items-start" ref="container_2">
                 <div class="flex w-52 items-center">
                 <span class="w-3 h-3 rounded-full bg-black mr-1"></span>
                 <span>Greener world</span>
                 </div>
-                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item-1">The sharp 'ping' of an AirDrop, the voices advocating for a greener world - we weaved them into a sonic tapestry that amplified the call for sustainable electronics.</div>
+                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item2">The sharp 'ping' of an AirDrop, the voices advocating for a greener world - we weaved them into a sonic tapestry that amplified the call for sustainable electronics.</div>
             </div>
         </template>
         <template #circles>
@@ -69,9 +69,13 @@ import {storeToRefs} from 'pinia'
 definePageMeta({
     layout: 'without-footer'
 })
-const hackContainer = ref()
 const router = useRouter()
+const hackContainer = ref()
+const container_1 = ref()
+const container_2 = ref()
 let ctx = ref()
+let firstCtx = ref()
+let secondCtx = ref()
 const playerStore = usePlayerStore()
 const {isPlaying, player} = storeToRefs(playerStore)
 
@@ -82,6 +86,40 @@ onBeforeRouteLeave(() => {
     }
 })
 onMounted(() => {
+    firstCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_1.value,
+                start: 'top 20%',
+                end: 'bottom 70%',
+            }
+        })
+        tl.fromTo('#item1', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_1.value)
+
+    secondCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_2.value,
+                start: 'top 50%',
+                end: 'bottom 80%',
+            }
+        })
+        tl.fromTo('#item2', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_2.value)
+
     ctx.value = gsap.context(() => {
         let tl = gsap.timeline({
             scrollTrigger: {
@@ -106,5 +144,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     ctx.value.revert()
+    firstCtx.value.revert()
+    secondCtx.value.revert()
 })
 </script>

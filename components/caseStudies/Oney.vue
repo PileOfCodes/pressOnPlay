@@ -12,8 +12,8 @@
             <div class="oney__container__face oney__container__face--front"></div>
             <div class="oney__container__face oney__container__face--top">
                 <div class="w-full h-full overflow-clip flex items-center justify-evenly">
-                    <div>
-                        <span class="inline-block w-12 h-12 md:w-16 md:h-16 lg:w-36 lg:h-36 bg-black rounded-full"></span>
+                    <div class="flex items-center gap-x-7">
+                        <BouncingCircle  target="firstCircle" />
                         <span class="text-[4rem] lg:text-[12rem] md:text-[6rem] tracking-tighter">NEY</span>
                     </div>
                 </div>
@@ -24,12 +24,12 @@
                         <ClientOnly>
                             <Vue3Marquee :duration="9">
                                 <div class="flex items-center gap-x-[300px]">
-                                    <div>
-                                        <span class="inline-block w-12 h-12 md:w-16 md:h-16 lg:w-36 lg:h-36 bg-black rounded-full"></span>
+                                    <div class="flex items-center gap-x-7">
+                                        <BouncingCircle  target="firstCircle" />
                                         <span class="text-[4rem] lg:text-[12rem] md:text-[6rem] tracking-tighter">NEY</span>
                                     </div>
-                                    <div>
-                                        <span class="inline-block w-12 h-12 md:w-16 md:h-16 lg:w-36 lg:h-36 bg-black rounded-full"></span>
+                                    <div class="flex items-center gap-x-7">
+                                        <BouncingCircle  target="firstCircle" />
                                         <span class="text-[4rem] lg:text-[12rem] md:text-[6rem] tracking-tighter">NEY</span>
                                     </div>
                                 </div>
@@ -72,6 +72,21 @@ watch([$viewport.breakpoint, mouseX], ([newBreakPoint, newMouseVal]) => {
         if(newMouseVal < 150) {
         current.value = 0
         }else if(newMouseVal > 150 && newMouseVal < 250){
+            current.value = 1
+        }else{
+            current.value = 2
+        }
+    }
+    
+    if(newBreakPoint == 'xl') {
+        if(newMouseVal < 20) {
+            mouseX.value = 20
+        }else if(newMouseVal > 1070){
+            mouseX.value = 1070
+        }
+        if(newMouseVal < 350) {
+        current.value = 0
+        }else if(newMouseVal > 350 && newMouseVal < 850){
             current.value = 1
         }else{
             current.value = 2

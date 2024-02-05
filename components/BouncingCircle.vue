@@ -1,19 +1,19 @@
 <template>
     <div v-if="props.target == 'firstCircle'">
-        <span ref="circle5" class="inline-block w-8 h-8 scale-[2] sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-[68px] lg:h-[68px] bg-black rounded-full"></span>
+        <span ref="circle5" class="inline-block w-8 h-8 scale-[2] sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-[70px] lg:h-[70px] bg-black rounded-full"></span>
     </div>
     <div v-else-if="props.target == 'case'" class="flex items-center">
-        <div ref="circle5" class="w-[22px] h-[22px] scale-[2] sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-[54px] lg:h-[54px] bg-black rounded-full"></div>
+        <div ref="circle5" class="w-[22px] h-[22px] scale-[2] sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-[68px] lg:h-[68px] bg-black rounded-full"></div>
     </div>
     <div v-else-if="props.target == 'slug'" class="flex items-center">
-        <span ref="circle1" class="inline-block w-[30px] h-[30px] sm:w-[37px] sm:h-[37px] scale-[2] md:w-[45px] md:h-[45px] lg:w-[63px] lg:h-[63px] bg-black rounded-full ml-3 mr-4 sm:mr-5 sm:ml-4 md:mx-6 lg:ml-8 lg:mr-8"></span>
-        <span ref="circle5" class="inline-block w-[30px] h-[30px] sm:w-[37px] sm:h-[37px] scale-[2] md:w-[45px] md:h-[45px] lg:w-[63px] lg:h-[63px] bg-black rounded-full ml-4 mr-3 sm:ml-5 sm:mr-4 md:mx-6 lg:ml-10 lg:mr-8"></span>
+        <span ref="circle1" class="inline-block w-[30px] h-[30px] sm:w-[37px] sm:h-[37px] scale-[2] md:w-[45px] md:h-[45px] lg:w-[70px] lg:h-[70px] bg-black rounded-full ml-3 mr-4 sm:mr-5 sm:ml-4 md:mx-6 lg:ml-8 lg:mr-8"></span>
+        <span ref="circle5" class="inline-block w-[30px] h-[30px] sm:w-[37px] sm:h-[37px] scale-[2] md:w-[45px] md:h-[45px] lg:w-[70px] lg:h-[70px] bg-black rounded-full ml-4 mr-3 sm:ml-5 sm:mr-4 md:mx-6 lg:ml-10 lg:mr-8"></span>
     </div>
     <div v-else-if="props.target == 'secondCircle'">
-        <span ref="circle1" class="inline-block w-8 h-8 scale-[2] sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-[68px] lg:h-[68px] bg-black rounded-full"></span>
+        <span ref="circle1" class="inline-block w-8 h-8 scale-[2] sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-[70px] lg:h-[70px] bg-black rounded-full"></span>
     </div>
     <div v-else-if="props.target == 'footer'">
-        <span ref="circle1" :class="props.color" class="inline-block w-[28px] scale-[2] h-[28px] mr-3 ml-4 md:ml-10 md:mr-10 md:w-[70px] md:h-[70px] rounded-full"></span>
+        <span ref="circle5" :class="props.color" class="inline-block w-[28px] scale-[2] h-[28px] mr-3 ml-4 md:ml-10 md:mr-10 md:w-[70px] md:h-[70px] rounded-full"></span>
     </div>
     <div v-else class="relative w-[340px] h-[260px] lg:w-[500px] lg:h-[300px]">
         <span ref="circle1" class="absolute left-24 lg:left-48 top-0 w-12 h-12 scale-[2] lg:w-16 lg:h-16 bg-black rounded-full"></span>
@@ -30,6 +30,7 @@ import {storeToRefs} from 'pinia'
 
 const props = defineProps(['target', 'color'])
 const audioBox = inject<any>('audioTrigger')
+const menuAudioBox = inject<any>('menuAudioTrigger')
 const playerStore = usePlayerStore()
 const visualiserStore = useVisualiserStore()
 const {isPlaying} = storeToRefs(playerStore)
@@ -77,6 +78,10 @@ onMounted(() => {
     }
 
     audioBox.value?.value.addEventListener('click', function(){
+        implementation()
+    })
+
+    menuAudioBox.value?.value.addEventListener('click', function(){
         implementation()
     })
 })

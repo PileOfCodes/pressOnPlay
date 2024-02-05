@@ -14,9 +14,9 @@
                 <CaseStudiesOney />
                 <CaseStudiesFlea />
             </div>
-            <div class="w-full flex items-center justify-center mt-4">
+            <NuxtLink to="/case-studies" class="w-full flex items-center justify-center mt-4">
                 <CustomeBtn btn-text="VIEW OUR WORK" />
-            </div>
+            </NuxtLink>
         </div>
 </template>
 <script setup lang="ts">

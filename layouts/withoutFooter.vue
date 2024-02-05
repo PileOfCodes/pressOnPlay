@@ -1,7 +1,7 @@
 <template>
     <div>
         <LayoutHeader @send-header="input => getHeader(input)" @audioTrigger="(input : HTMLDivElement) => getAudioTrigger(input)" />
-        <!-- <StickyMenu :isLargeEnough="isLargeEnough" @menuAudioTrigger="(input : any) => getMenuAudioTrigger(input)"  /> -->
+        <StickyMenu :isLargeEnough="isLargeEnough" @menuAudioTrigger="(input : any) => getMenuAudioTrigger(input)"  />
         <slot/>
     </div>
 </template>

@@ -19,9 +19,9 @@
             <div style="font-weight: 900" class="text-end mt-4 lg:text-[120px]">be quiet</div>
         </div>
         <div id="item1" class="w-full flex items-center justify-center px-5">
-            <div class="relative w-full lg:w-auto" id="item-3">
+            <NuxtLink to="/case-studies" class="relative w-full lg:w-auto" id="item-3">
                 <CustomeBtn btn-text="VIEW OUR WORK" />
-            </div>
+            </NuxtLink>
         </div>
     </div>
 </template>

@@ -21,9 +21,9 @@
                                 production, or basically anything where sound matters.
                             </div>
                         </div>
-                        <div class="py-4 relative" id="item-3">
+                        <NuxtLink to="/studio" class="py-4 relative" id="item-3">
                             <CustomeBtn btn-text="Learn More" />
-                        </div>
+                        </NuxtLink>
                     </div>
                 </div>
             </div>

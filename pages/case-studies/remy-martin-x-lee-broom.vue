@@ -27,21 +27,21 @@
             </div>
         </div>
         <CaseStudiesPlayBoard />
-        <div class="py-8 px-5">
+        <div class="py-8 px-5" ref="container_1">
             <div class="text-[40px] sm:text-[80px] sm:pr-10 sm:leading-[100px]" style="font-weight: 900;">Harmonizing Craftsmanship: Rémy Martin x Lee Broom's Symphony of Design and Sound</div>
             <div class="flex items-end justify-end">
-                <div class="mt-32 text-[14px] leading-[15px] w-[200px] sm:w-[300px]">Respecting heritage while pushing boundaries, that's our jam. When Rémy Martin and the prestigious British designer Lee Broom joined forces, we got the chance to compose the score for this spectacular fusion of craft and modernity. We shaped an exclusive original track for the key video and engineered the symphony of sounds for the interactive digital experience.</div>
+                <div class="mt-32 text-[14px] leading-[15px] w-[200px] sm:w-[300px]" id="item1">Respecting heritage while pushing boundaries, that's our jam. When Rémy Martin and the prestigious British designer Lee Broom joined forces, we got the chance to compose the score for this spectacular fusion of craft and modernity. We shaped an exclusive original track for the key video and engineered the symphony of sounds for the interactive digital experience.</div>
             </div>
         </div>
     </div>
     <CaseStudiesAdSection >
         <template #header>
-            <div class="w-full flex gap-x-2 md:gap-x-32 items-start" ref="container-1">
+            <div class="w-full flex gap-x-2 md:gap-x-32 items-start" ref="container_2">
                 <div class="flex w-52 items-center">
                 <span class="w-3 h-3 rounded-full bg-black mr-1"></span>
                 <span>Aromatic symphony</span>
                 </div>
-                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item-1">Challenged to amplify not just the radiance and opulence of the blend, but also the aromatic symphony revealed with a single ice cube - we turned that frosty element into an icy melody, a cool thread running through our composition.</div>
+                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item2">Challenged to amplify not just the radiance and opulence of the blend, but also the aromatic symphony revealed with a single ice cube - we turned that frosty element into an icy melody, a cool thread running through our composition.</div>
             </div>
         </template>
         <template #circles>
@@ -58,12 +58,12 @@
             </div>
         </template>
         <template #footer>
-            <div class="w-full flex gap-x-2 md:gap-x-32 items-start pt-10" ref="container-2">
+            <div class="w-full flex gap-x-2 md:gap-x-32 items-start pt-10" ref="container_3">
                 <div class="flex w-52 items-center">
                     <span class="w-3 h-3 rounded-full bg-black mr-1"></span>
                     <span>Eaux-de-vie</span>
                 </div>
-                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item-1">Sculpting the iconic XO decanter's sound was like 'carving' hundreds of fine 'starburst' cuts into our musical score, each one reflecting the many eaux-de-vie within the Rémy Martin XO blend.</div>
+                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item3">Sculpting the iconic XO decanter's sound was like 'carving' hundreds of fine 'starburst' cuts into our musical score, each one reflecting the many eaux-de-vie within the Rémy Martin XO blend.</div>
             </div>
         </template>
     </CaseStudiesAdSection>
@@ -96,15 +96,72 @@ onBeforeRouteLeave(() => {
 definePageMeta({
     layout: 'without-footer'
 })
-const remyContainer = ref()
 const router = useRouter()
+const remyContainer = ref()
+const container_1 = ref()
+const container_2 = ref()
+const container_3 = ref()
 let ctx = ref()
+let firstCtx = ref()
+let secondCtx = ref()
+let thirdCtx = ref()
 onMounted(() => {
+    firstCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_1.value,
+                start: 'top 20%',
+                end: 'bottom 70%',
+            }
+        })
+        tl.fromTo('#item1', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_1.value)
+
+    secondCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_2.value,
+                start: 'top 50%',
+                end: 'bottom 80%',
+            }
+        })
+        tl.fromTo('#item2', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_2.value)
+    
+    thirdCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_3.value,
+                start: 'top 50%',
+                end: 'bottom 80%',
+            }
+        })
+        tl.fromTo('#item3', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_3.value)
+
     ctx.value = gsap.context(() => {
         let tl = gsap.timeline({
             scrollTrigger: {
                 trigger: remyContainer.value,
-                start: 'top 10%',
+                start: '100px 10%',
                 end: '+=4000',
                 pin: true,
                 anticipatePin: 1
@@ -121,7 +178,11 @@ onMounted(() => {
         })
     }, remyContainer.value)
 })
+
 onUnmounted(() => {
   ctx.value.revert()
+  firstCtx.value.revert()
+  secondCtx.value.revert()
+  thirdCtx.value.revert()
 })
 </script>

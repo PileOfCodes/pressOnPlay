@@ -1,8 +1,8 @@
 <template>
     <div class="FooterCube FooterCube--shadows" ref="container">
         <div class="FooterCube__container">
-            <div :class="props.fromContact ? 'bg-white text-black' : 'bg-black text-white'"  class="FooterCube__container__face FooterCube__container__face--front"></div>
-            <div :class="props.fromContact ? 'bg-white text-black' : 'bg-black text-white'" class="FooterCube__container__face FooterCube__container__face--top">
+            <div   class="FooterCube__container__face FooterCube__container__face--front bg-black text-white"></div>
+            <div  class="FooterCube__container__face FooterCube__container__face--top bg-black text-white">
                 <div class="w-full h-full overflow-clip flex items-center justify-between ">
                     <div class="flex items-center gap-x-1">
                         <div class="text-[5rem] md:text-[13rem] tracking-tighter">T</div>
@@ -12,7 +12,7 @@
                     <div class="text-[12rem]"></div>
                 </div>
             </div>
-            <div :class="props.fromContact ? 'bg-white text-black' : 'bg-black text-white'" class="FooterCube__container__face FooterCube__container__face--back">
+            <div  class="FooterCube__container__face FooterCube__container__face--back bg-black text-white">
                 <div class="w-full h-full overflow-clip flex items-center justify-between ">
                     <div class="flex items-center gap-x-1">
                         <div class="text-[5rem] md:text-[13rem] tracking-tighter">T</div>
@@ -22,7 +22,7 @@
                     <div class="text-[12rem]"></div>
                 </div>
             </div>
-            <div :class="props.fromContact ? 'bg-white text-black' : 'bg-black text-white'" class="FooterCube__container__face FooterCube__container__face--bottom"></div>
+            <div  class="FooterCube__container__face FooterCube__container__face--bottom bg-black text-white"></div>
         </div>
     </div>
 </template>

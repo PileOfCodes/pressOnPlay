@@ -20,21 +20,21 @@
             </div>
         </div>
         <CaseStudiesPlayBoard />
-        <div class="py-8 px-5">
+        <div class="py-8 px-5" ref="container_1">
             <div class="text-[40px] sm:text-[80px] sm:pr-10 sm:leading-[100px]" style="font-weight: 900;">Unveiling history with a modern twist: the soundtrack of Samaritaine.</div>
             <div class="flex items-end justify-end">
-                <div class="mt-32 text-[14px] leading-[15px] w-[200px] sm:w-[300px]">When LVMH tasked Press Play On Tape with scoring the online comeback of the iconic Samaritaine, we jumped at the chance. We composed a track named "Pont Neuf", a blend of 60s vibes and modern composition, infusing a touch of vintage charm into Samaritaine's bold revival.</div>
+                <div class="mt-32 text-[14px] leading-[15px] w-[200px] sm:w-[300px]" id="item1">When LVMH tasked Press Play On Tape with scoring the online comeback of the iconic Samaritaine, we jumped at the chance. We composed a track named "Pont Neuf", a blend of 60s vibes and modern composition, infusing a touch of vintage charm into Samaritaine's bold revival.</div>
             </div>
         </div>
     </div>
     <CaseStudiesAdSection>
         <template #header>
-            <div class="w-full flex gap-x-2 md:gap-x-32 items-start" ref="container-1">
+            <div class="w-full flex gap-x-2 md:gap-x-32 items-start" ref="container_2">
                 <div class="flex w-52 items-center">
                 <span class="w-3 h-3 rounded-full bg-black mr-1"></span>
                 <span>Iconic identity</span>
                 </div>
-                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item-1">Crafting music for Samaritaine was like playing with history. Its iconic identity became a love letter in notes and melodies.</div>
+                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item2">Crafting music for Samaritaine was like playing with history. Its iconic identity became a love letter in notes and melodies.</div>
             </div>
         </template>
         <template #circles>
@@ -50,12 +50,12 @@
             </div>
         </template>
         <template #footer>
-            <div class="w-full flex gap-x-2 md:gap-x-32 items-start pt-10" ref="container-2">
+            <div class="w-full flex gap-x-2 md:gap-x-32 items-start pt-10" ref="container_3">
                 <div class="flex w-52 items-center">
                     <span class="w-3 h-3 rounded-full bg-black mr-1"></span>
                     <span>Nostalgia</span>
                 </div>
-                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item-1">With vintage beats and lush vocals, every note in 'Pont Neuf' is a hint of nostalgia yet resolutely fresh and catchy.</div>
+                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item3">With vintage beats and lush vocals, every note in 'Pont Neuf' is a hint of nostalgia yet resolutely fresh and catchy.</div>
             </div>
         </template>
     </CaseStudiesAdSection>
@@ -96,8 +96,65 @@ definePageMeta({
 })
 const samContainer = ref()
 const router = useRouter()
+const container_1 = ref()
+const container_2 = ref()
+const container_3 = ref()
 let ctx = ref()
+let firstCtx = ref()
+let secondCtx = ref()
+let thirdCtx = ref()
 onMounted(() => {
+    firstCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_1.value,
+                start: 'top 20%',
+                end: 'bottom 70%',
+            }
+        })
+        tl.fromTo('#item1', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_1.value)
+
+    secondCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_2.value,
+                start: 'top 50%',
+                end: 'bottom 80%',
+            }
+        })
+        tl.fromTo('#item2', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_2.value)
+    
+    thirdCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_3.value,
+                start: 'top 50%',
+                end: 'bottom 80%',
+            }
+        })
+        tl.fromTo('#item3', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_3.value)
+
     ctx.value = gsap.context(() => {
         let tl = gsap.timeline({
             scrollTrigger: {
@@ -122,5 +179,8 @@ onMounted(() => {
 
 onUnmounted(() => {
     ctx.value.revert()
+    firstCtx.value.revert()
+    secondCtx.value.revert()
+    thirdCtx.value.revert()
 })
 </script>

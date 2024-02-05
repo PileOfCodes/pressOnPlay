@@ -82,16 +82,15 @@ onMounted(() => {
         let tl = gsap.timeline({
             scrollTrigger: {
                 trigger: container.value,
-                start: '-300px 20%',
+                start: 'top 20%',
                 end: 'bottom 70%'
             }
         })
         tl.fromTo('#item1', {
-            y: 50,
+            y: 40,
             opacity: 0
         }, {
             y: 0,
-            duration: 0.6,
             opacity: 1
         })
     }, container.value)

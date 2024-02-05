@@ -11,3 +11,32 @@
             </div>
         </div>
 </template>
+
+<script setup lang="ts">
+import gsap from 'gsap'
+let ctx = ref()
+const studies = ref()
+onMounted(() => {
+    ctx.value = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#item-1',
+            start: '-300px 60%',
+            end: '-100px 90%'
+          }  
+        })
+
+        tl.fromTo('#item-1', {
+            y: 40,
+            opacity: 0
+        }, {
+            y: 0,
+            opacity: 1
+        })
+    }, studies.value)
+})
+
+onUnmounted(() => {
+    ctx.value.revert()
+})
+</script>

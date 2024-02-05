@@ -2,7 +2,7 @@
     <div class="bg-[#ff2803]">
         <div class="flex flex-col items-center justify-center pt-20">
             <div class="text-[4rem] lg:text-[11rem] sm:text-[6rem] md:text-[8rem] leading-[100px] lg:leading-[150px]">PLAY</div>
-            <div class="flex items-center justify-center leading-[150px] leading-[30px] sm:leading-[80px] md:leading-[140px] lg:leading-[150px]">
+            <div class="flex items-center justify-center leading-[30px] sm:leading-[80px] md:leading-[140px] lg:leading-[150px]">
                 <span class="text-[4rem] lg:text-[11rem] sm:text-[6rem] md:text-[8rem] mr-2 lg:mr-2">Y</span>
                 <BouncingCircle target="case" />
                 <span class="text-[4rem] lg:text-[11rem] sm:text-[6rem] md:text-[8rem] ml-3 mr-3 md:ml-5 md:mr-5 lg:mr-6 lg:ml-6">UR P</span>
@@ -25,21 +25,21 @@
             </div>
         </div>
         <CaseStudiesPlayBoard />
-        <div class="py-8 px-5">
+        <div class="py-8 px-5" ref="container_1">
             <div class="text-[40px] sm:text-[80px] sm:pr-10 sm:leading-[100px]" style="font-weight: 900;">Immerse yourself in Powermatte-ropolis, where the roar of engines meets the thrill of a lipstick revolution.</div>
             <div class="flex items-end justify-end">
-                <div class="mt-32 text-[14px] leading-[15px] w-[200px] sm:w-[300px]">Embark on a sonic journey through Powermatte-ropolis, a neon city pulsing with NARS's vibrant shades. As part of the "Play Your Power" campaign, we crafted an electrifying soundscape, mixing echoes of personal influences such as TRON and Akira with the cutting-edge spirit of NARS. The result? A thrilling auditory ride, fueling players' quest for the top score, with nostalgia-inspiring sound that touches the heart of Press Play On Tape.</div>
+                <div class="mt-32 text-[14px] leading-[15px] w-[200px] sm:w-[300px]" id="item1">Embark on a sonic journey through Powermatte-ropolis, a neon city pulsing with NARS's vibrant shades. As part of the "Play Your Power" campaign, we crafted an electrifying soundscape, mixing echoes of personal influences such as TRON and Akira with the cutting-edge spirit of NARS. The result? A thrilling auditory ride, fueling players' quest for the top score, with nostalgia-inspiring sound that touches the heart of Press Play On Tape.</div>
             </div>
         </div>
     </div>
     <CaseStudiesAdSection >
         <template #header>
-            <div class="w-full flex gap-x-2 md:gap-x-32 items-start" ref="container-1">
+            <div class="w-full flex gap-x-2 md:gap-x-32 items-start" ref="container_2">
                 <div class="flex w-52 items-center">
                 <span class="w-3 h-3 rounded-full bg-black mr-1"></span>
                 <span>Cyberpunk symphony</span>
                 </div>
-                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item-1">Echoing the sounds of the 80s classics, we crafted a cyberpunk symphony of roaring engines and ethereal synths. This is the sound of a city that thrives on lipstick power and the thrill of the chase.</div>
+                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item2">Echoing the sounds of the 80s classics, we crafted a cyberpunk symphony of roaring engines and ethereal synths. This is the sound of a city that thrives on lipstick power and the thrill of the chase.</div>
             </div>
         </template>
         <template #circles>
@@ -56,12 +56,12 @@
             </div>
         </template>
         <template #footer>
-            <div class="w-full flex gap-x-2 md:gap-x-32 items-start pt-10" ref="container-2">
+            <div class="w-full flex gap-x-2 md:gap-x-32 items-start pt-10" ref="container_3">
                 <div class="flex w-52 items-center">
                     <span class="w-3 h-3 rounded-full bg-black mr-1"></span>
                     <span>Three players</span>
                 </div>
-                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item-1">In Powermatte-ropolis, every shade of lipstick has its unique roar, its unique rhythm. We created distinct soundtracks for each of the three players - Dragon Girl, Too Hot To Hold and American Woman. As the player, you are not just riding a bike; you are riding the wave of your chosen soundtrack, your chosen power.</div>
+                <div class="text-[2.5rem] w-[350px] md:w-[500px] lg:w-3/4  leading-[40px] tracking-tighter" id="item3">In Powermatte-ropolis, every shade of lipstick has its unique roar, its unique rhythm. We created distinct soundtracks for each of the three players - Dragon Girl, Too Hot To Hold and American Woman. As the player, you are not just riding a bike; you are riding the wave of your chosen soundtrack, your chosen power.</div>
             </div>
         </template>
     </CaseStudiesAdSection>
@@ -74,7 +74,7 @@
                             <div class="text-[5rem] lg:text-[10rem] sm:text-[6rem] md:text-[8rem]">REMY</div>
                             <div class="text-[5rem] lg:text-[10rem] sm:text-[6rem] md:text-[8rem]">MARTIN</div>
                         </div>
-                        <div class="flex items-center leading-[150px] leading-[50px] sm:leading-[80px] md:leading-[140px] lg:leading-[150px]">
+                        <div class="flex items-center leading-[50px] sm:leading-[80px] md:leading-[140px] lg:leading-[150px]">
                             <div class="text-[5rem] lg:text-[10rem] sm:text-[6rem] md:text-[8rem] ">X LEE </div>
                             <div class="flex items-center leading-[50px] sm:leading-[80px] md:leading-[140px] lg:leading-[150px]">
                                 <div class="text-[5rem] lg:text-[10rem] sm:text-[6rem] md:text-[8rem]">BR</div>
@@ -109,8 +109,65 @@ definePageMeta({
 })
 const narsContainer = ref()
 const router = useRouter()
+const container_1 = ref()
+const container_2 = ref()
+const container_3 = ref()
 let ctx = ref()
+let firstCtx = ref()
+let secondCtx = ref()
+let thirdCtx = ref()
 onMounted(() => {
+    firstCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_1.value,
+                start: 'top 20%',
+                end: 'bottom 70%',
+            }
+        })
+        tl.fromTo('#item1', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_1.value)
+
+    secondCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_2.value,
+                start: 'top 50%',
+                end: 'bottom 80%',
+            }
+        })
+        tl.fromTo('#item2', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_2.value)
+    
+    thirdCtx.value = gsap.context(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container_3.value,
+                start: 'top 50%',
+                end: 'bottom 80%',
+            }
+        })
+        tl.fromTo('#item3', {
+            y: 70,
+            opacity: 0
+        },{
+            y: 0,
+            opacity: 1
+        })
+    }, container_3.value)
+
     ctx.value = gsap.context(() => {
         let tl = gsap.timeline({
             scrollTrigger: {
@@ -135,5 +192,8 @@ onMounted(() => {
 
 onUnmounted(() => {
     ctx.value.revert()
+    firstCtx.value.revert()
+    secondCtx.value.revert()
+    thirdCtx.value.revert()
 })
 </script>

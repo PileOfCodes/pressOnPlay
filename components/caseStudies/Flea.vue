@@ -12,12 +12,12 @@
             <div class="flea__container">
                 <div class="flea__container__face flea__container__face--front"></div>
                 <div class="flea__container__face flea__container__face--top">
-                    <div class="w-full h-full overflow-clip flex items-center justify-evenly">
+                    <div class="text-nowrap text-clip w-full h-full overflow-clip flex items-center justify-evenly">
                         <span class="text-[4rem] lg:text-[12rem] md:text-[6rem] tracking-tighter">FLEA TICKETS</span>
                     </div>
                 </div>
                 <div class="flea__container__face flea__container__face--back" ref="backFace" :class="onHover ? 'bg-[#ff2803] block' : 'bg-[#f4f5ef] hidden'">
-                    <NuxtLink to="/studio" class="w-full h-full overflow-clip flex items-center justify-between">
+                    <NuxtLink to="/studio" class="text-nowrap text-clip w-full h-full overflow-clip flex items-center justify-between">
                         <div ref="audioBox">
                             <ClientOnly>
                                 <Vue3Marquee :duration="9">
@@ -64,6 +64,21 @@ watch([$viewport.breakpoint, mouseX], ([newBreakPoint, newMouseVal]) => {
         if(newMouseVal < 150) {
         current.value = 0
         }else if(newMouseVal > 150 && newMouseVal < 250){
+            current.value = 1
+        }else{
+            current.value = 2
+        }
+    }
+
+    if(newBreakPoint == 'xl') {
+        if(newMouseVal < 20) {
+            mouseX.value = 20
+        }else if(newMouseVal > 1070){
+            mouseX.value = 1070
+        }
+        if(newMouseVal < 350) {
+        current.value = 0
+        }else if(newMouseVal > 350 && newMouseVal < 850){
             current.value = 1
         }else{
             current.value = 2

@@ -2,15 +2,15 @@
     <div v-if="showMenu" :class="showMenu ? 'showAnimateMenu' : ''" class="bg-black text-white">
         <MobileMenu :showMenu="showMenu" @send-audio-trigger="(input) => getAudioTrigger(input)" @send-show-menu="(input) => showMenu = input" />
     </div>
-    <div ref="header" :class="showMenu ? '' : 'hideAnimateMenu'" class="text-black bg-white relative flex items-center justify-between pl-6 pr-6">
+    <div ref="header" :class="showMenu ? '' : 'hideAnimateMenu'" class="bg-black text-white relative flex items-center justify-between pl-6 pr-6">
         <NuxtLink to="/" class="relative font-bold text-[17px] group flex items-center py-1 ">
             <span>PRESS</span>
-            <span class="drawer__text__desktop--play bg-white">PLAY</span>
-            <span class="drawer__text__desktop--on bg-white">
-                <span class="fill__desktop__o o">O</span>N
+            <span class="drawer__text__desktop--play bg-black">PLAY</span>
+            <span class="drawer__text__desktop--on bg-black">
+                <span class="fill__desktop__o o bg-black">O</span>N
             </span>
-            <span class="drawer__text__desktop--tape bg-white">TAPE</span>
-            <span class="drawer__text__desktop--space bg-white"></span>
+            <span class="drawer__text__desktop--tape bg-black">TAPE</span>
+            <span class="drawer__text__desktop--space bg-black"></span>
         </NuxtLink>
         <div class="">
             <HeaderPlayer :is-vertical="false" @send-audio-trigger="(input) => getAudioTrigger(input)" />
@@ -30,15 +30,16 @@
             <div class="hamburgger__menu__secondChild"></div>
         </div>
     </div>
-    <div class="p-8 bg-white" ref="contact">
-        <FooterFirstCube :from-contact="true" />
-        <FooterSecondCube :from-contact="true" />
+    <StickyMenu v-if="false" :isLargeEnough="isLargeEnough" @menuAudioTrigger="(input : any) => getMenuAudioTrigger(input)"  />
+    <div class="p-8 bg-black text-white" ref="contact">
+        <FooterFirstCube />
+        <FooterSecondCube />
         <div class="w-full flex items-start justify-between pb-6 pt-16 md:pr-[200px]" id="contactText">
             <div class="xs:w-[200px] md:w-[520px] text-[2.5rem]">We saw your future and it sounds good.</div>
             <div class="flex flex-col">
                 <div class="h-[100px]">
                     <div class="flex gap-x-1 items-center">
-                        <span class="w-3 h-3 rounded-full bg-black"></span>
+                        <span class="w-3 h-3 rounded-full bg-white"></span>
                         <span>Get in touch</span>
                     </div>
                     <div class="mt-5">+33 6 17 05 30 38</div>
@@ -59,7 +60,7 @@
                 </div>
                 <div class="mt-5">
                     <div class="flex gap-x-1 items-center">
-                        <span class="w-3 h-3 rounded-full bg-black"></span>
+                        <span class="w-3 h-3 rounded-full bg-white"></span>
                         <span>Visit us</span>
                     </div>
                     <div class="mt-5">(studio)</div>
@@ -105,13 +106,16 @@ const {width} = useElementSize(header)
 let ctx = ref<any>()
 const audioTrigger = ref()
 const isLargeEnough = ref()
+const menuAudioTrigger = ref()
 const source = ref('loic@pressplayontape.studio')
 const { copy, copied} = useClipboard({ source })
 
 function getAudioTrigger(input : HTMLDivElement) {
     audioTrigger.value = input
 }
-
+function getMenuAudioTrigger(input : any) {
+    menuAudioTrigger.value = input
+}
 function getHeader(input : boolean) {
     isLargeEnough.value = input
 }
@@ -128,6 +132,7 @@ watchEffect(() => {
 })
 
 provide('audioTrigger', audioTrigger)
+provide('menuAudioTrigger', menuAudioTrigger)
 
 onMounted(() => {
     gsap.defaults({
@@ -161,7 +166,7 @@ onUnmounted(() => {
     @apply relative
 }
 .clipboard__cube {
-    @apply absolute w-4 h-4 rounded-[3px] bg-transparent border-black border-2 
+    @apply absolute w-4 h-4 rounded-[3px] bg-transparent border-white border-2 
     transition-all duration-300 group-hover:transition-all group-hover:duration-300
 }
 .clipboard__cube--first {
@@ -185,5 +190,8 @@ onUnmounted(() => {
 .slide-y-leave-to {
   opacity: 0;
   transform: translateY(4px);
+}
+.o {
+    @apply after:bg-white after:w-[9px] after:h-[9px] after:block after:left-[2px] after:rounded-full after:top-[8px]
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-    <div class="px-4 pt-8 pb-6">
+    <div class="px-4 pt-8 pb-6" id="container">
         <div style="font-weight: 900" 
-        class=" text-[46px] sm:text-[115px] leading-[60px] sm:leading-[140px]">
+        class=" text-[46px] sm:text-[115px] leading-[60px] sm:leading-[140px]" id="textTitle">
         Cool sounds to supercharge digital and real-life moments.
         </div>
         <div class="lg:flex lg:justify-end lg:items-end">
@@ -15,8 +15,27 @@
 
 <script setup lang="ts">
 import gsap from 'gsap'
-
+let ctx = ref()
+const container = ref()
 onMounted(() => {
+    ctx.value = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#textTitle',
+            
+            start: 'top 40%',
+            end: 'bottom bottom'
+          }  
+        })
+
+        tl.fromTo('#textTitle', {
+            y: 70,
+            opacity: 0
+        }, {
+            y: 0,
+            opacity: 1
+        })
+    }, container.value)
     gsap.utils.toArray(".parallax-container .parallax-image").forEach((section : any, i) => {
         const heightDiff = section.offsetHeight - section.parentElement.offsetHeight;
         
@@ -31,6 +50,10 @@ onMounted(() => {
             ease: "none"
         });
     });
+})
+
+onUnmounted(() => {
+    ctx.value.revert()
 })
 </script>
 
