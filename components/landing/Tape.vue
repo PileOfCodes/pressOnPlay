@@ -5,9 +5,9 @@
             <div  class="Tape__container__face Tape__container__face--top">
                 <div class="w-full h-full overflow-clip flex flex-col md:flex-row md:items-center justify-center md:pl-[400px]">
                     <div class="text-[6rem] md:text-[12rem]">TAPE</div>
-                    <div class="md:absolute md:w-full leading-[20px] md:text-start md:pl-[150px] text-[24px] tracking-tight md:bottom-8">Amplify your worlds</div>
+                    <div class="md:absolute md:w-full leading-[20px] md:text-start md:pl-[100px] text-[24px] tracking-tight md:bottom-8">Amplify your worlds</div>
                 </div>
-                <div class="hidden absolute w-full lg:flex items-center justify-end pr-16 font-thin tracking-tight bottom-8">
+                <div class="hidden absolute w-full lg:flex items-center justify-end pr-16 xl:pr-20 font-thin tracking-tight bottom-8">
                     <div class="h-6">
                         <ClientOnly>
                             <Vue3Marquee :vertical="true" :duration="2" :clone="true" :direction="'reverse'">
@@ -22,9 +22,9 @@
             <div  class="Tape__container__face Tape__container__face--back">
                 <div class="w-full h-full overflow-clip flex flex-col  md:flex-row md:items-center justify-center md:pl-[400px]">
                     <div class="text-[6rem] md:text-[12rem]">TAPE</div>
-                    <div class="md:absolute md:w-full leading-[20px] md:text-start md:pl-[20px] lg:pl-[100px] xl:pl-[150px] text-[24px] tracking-tight md:bottom-8">Amplify your worlds</div>
+                    <div class="md:absolute md:w-full leading-[20px] md:text-start md:pl-[20px] lg:pl-[100px] xl:pl-[100px] text-[24px] tracking-tight md:bottom-8">Amplify your worlds</div>
                 </div>
-                <div class="hidden absolute w-full lg:flex items-center justify-end pr-16 xl:pr-24 font-thin tracking-tight bottom-8">
+                <div class="hidden absolute w-full lg:flex items-center justify-end pr-16 xl:pr-20 font-thin tracking-tight bottom-8">
                     <div class="h-6">
                         <ClientOnly>
                             <Vue3Marquee :vertical="true" :duration="2" :clone="true" :direction="'reverse'">
@@ -62,7 +62,7 @@ onMounted(() => {
 .Tape__container {
     height: 100%;
     position: relative;
-    transform: translateZ(-150px) rotateX(0deg);
+    transform: translateZ(-100px) rotateX(0deg);
     transform-style: preserve-3d;
     transition: transform 1s cubic-bezier(.25,1,.5,1);
     width: 100%;
@@ -81,7 +81,7 @@ onMounted(() => {
 }
 
 .Tape--top>.Tape__container {
-    transform: translateZ(-150px) rotateX(-90.1deg);
+    transform: translateZ(-100px) rotateX(-90.1deg);
 }
 
 .Tape--back>.Tape__container {
@@ -89,16 +89,16 @@ onMounted(() => {
 }
 
 .Tape__container__face--front {
-    transform: rotateY(0deg) translateZ(150px);
+    transform: rotateY(0deg) translateZ(100px);
 }
 .Tape__container__face--top {
-    transform: rotateX(90.1deg) translateZ(150px);
+    transform: rotateX(90.1deg) translateZ(100px);
 }
 .Tape__container__face--back {
-    transform: translateZ(-150px) rotateY(-180deg) rotate(180deg);
+    transform: translateZ(-100px) rotateY(-180deg) rotate(180deg);
 }
 .Tape__container__face--bottom {
-    transform: rotateX(-90.1deg) translateZ(150px);
+    transform: rotateX(-90.1deg) translateZ(100px);
 }
 
 .Tape--shadows .Tape__container__face:after {
