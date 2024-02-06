@@ -81,7 +81,7 @@ onMounted(() => {
 }
 
 @keyframes showStickyMenu {
-    form {display: none;height: 0; opacity: 0;}
+    from {display: none;height: 0; opacity: 0;}
     to {display: flex;height: 100px; opacity: 1;}
 }
 
@@ -91,7 +91,7 @@ onMounted(() => {
 }
 
 @keyframes hideStickyMenu {
-    form {display: flex;height: 100px; }
+    from {display: flex;height: 100px; }
     to {display: none;height: 0;}
 }
 
