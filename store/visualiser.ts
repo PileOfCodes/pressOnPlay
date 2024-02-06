@@ -21,5 +21,5 @@ export const useVisualiserStore = defineStore('visualiser', () => {
         }
     })
 
-    return {frequencyData, analyser}
+    return {frequencyData, analyser, ctx}
 })

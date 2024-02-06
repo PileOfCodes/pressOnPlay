@@ -10,19 +10,7 @@
                 </div>
             </div>
             <div  class="Perspective__container__face Perspective__container__face--top">
-                <div class="w-full h-full overflow-clip flex items-center justify-between px-8 md:px-20">
-                    <div>
-                        <span class="inline-block w-8 h-8 lg:w-20 lg:h-20 bg-black rounded-full" ref="circle1"></span>
-                        <span class="inline-block w-8 h-8 lg:w-20 lg:h-20 bg-black rounded-full ml-12 md:ml-24" ref="circle2"></span>
-                    </div>
-                    <div>
-                        <span class="inline-block w-8 h-8 lg:w-20 lg:h-20 bg-black rounded-full" ref="circle3"></span>
-                        <span class="inline-block w-8 h-8 lg:w-20 lg:h-20 bg-black rounded-full ml-12 md:ml-24" ref="circle4"></span>
-                    </div>
-                    <div>
-                        <span class="inline-block w-8 h-8 lg:w-20 lg:h-20 bg-black rounded-full" ref="circle5"></span>
-                    </div>
-                </div>
+                <BouncingCircle target="visualiser" />
             </div>
             <div  class="Perspective__container__face Perspective__container__face--back">
 
@@ -33,76 +21,12 @@
 </template>
 
 <script setup lang="ts">
-import {inject} from 'vue'
 import {usePlayerStore} from '@/store/Player'
-import {useVisualiserStore} from '@/store/visualiser'
 import {storeToRefs} from 'pinia'
-const props = defineProps(['audioBox'])
 
-const audioBox = inject<any>('audioTrigger')
-const menuAudioBox = inject<any>('menuAudioTrigger')
 const playerStore = usePlayerStore()
-const visualiserStore = useVisualiserStore()
 const {isPlaying} = storeToRefs(playerStore)
-const {frequencyData, analyser} = storeToRefs(visualiserStore)
-const circle1 = ref<HTMLSpanElement | null>(null)
-const circle2 = ref<HTMLSpanElement | null>(null)
-const circle3 = ref<HTMLSpanElement | null>(null)
-const circle4 = ref<HTMLSpanElement | null>(null)
-const circle5 = ref<HTMLSpanElement | null>(null)
-let interval = ref<any>(null)
-onMounted(() => {
-    function defaultCircle() {
-        if(circle1.value) circle1.value.style.transform = 'scale(2)'
-        if(circle2.value) circle2.value.style.transform = 'scale(2)'
-        if(circle5.value) circle5.value.style.transform = 'scale(2)'
-    }
-    function implementation() {
 
-        if(!isPlaying.value) {
-            interval.value = setInterval(() => {
-            analyser.value?.getByteFrequencyData(frequencyData.value)
-            const ranges = [
-                { min: 0, max: 100 },
-                { min: 100, max: 200 },
-                { min: 200, max: 300 },
-                { min: 300, max: 400 },
-                { min: 400, max: 510 }
-            ]
-            for (let index = 0; index < 5; index++) {
-                const fd = frequencyData.value[index]
-                const range = ranges[index];
-                const result = (fd - range.min) / (range.max - range.min)
-                const scale = Math.max(0.7 , Math.min(2.1, Math.abs(result))) 
-                const circle = eval(`circle${index + 1}.value`);
-                if (circle) {
-                    circle.style.transition = 'all 0.05s'
-                    circle.style.transform = `scale(${scale})`;
-                }
-            }
-            }, 1)
-        }else {
-            clearInterval(interval.value)
-            defaultCircle()
-        }
-    }
-
-    props.audioBox.value?.addEventListener('click', function() {
-        implementation()
-    })
-
-    audioBox.value?.value.addEventListener('click', function(){
-        implementation()
-    })
-
-    menuAudioBox.value?.value.addEventListener('click', function(){
-        implementation()
-    })
-})
-
-onUnmounted(() => {
-    clearInterval(interval.value)
-})
 </script>
 
 <style>
