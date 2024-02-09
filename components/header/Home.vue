@@ -1,13 +1,13 @@
 <template>
     <div>
-        <NuxtLink to="/" class="relative font-bold text-[17px] group flex items-center py-1 ">
-            <span>PRESS</span>
-            <span :class="bgc" class="drawer__text__desktop--play">PLAY</span>
-            <span :class="bgc" class="drawer__text__desktop--on">
-                <span class="fill__desktop__o o">O</span>N
+        <NuxtLink to="/" class="relative z-20 font-bold text-[17px] group flex items-center py-1 ">
+            <span :class="props.showMenu ? 'bg-black text-white' : bgc">PRESS</span>
+            <span :class="props.showMenu ? 'bg-black text-white drawer__text__mobile--play' : `${bgc} drawer__text__desktop--play`">PLAY</span>
+            <span :class="props.showMenu ? 'bg-black text-white drawer__text__mobile--on' : `${bgc} drawer__text__desktop--on`">
+                <span :class="props.showMenu ? 'fill__mobile__o menu--o' : 'fill__desktop__o o'">O</span>N
             </span>
-            <span :class="bgc" class="drawer__text__desktop--tape">TAPE</span>
-            <span :class="bgc" class="drawer__text__desktop--space"></span>
+            <span :class="props.showMenu ? 'bg-black text-white drawer__text__mobile--tape' : `${bgc} drawer__text__desktop--tape`">TAPE</span>
+            <span :class="props.showMenu ? 'bg-black text-white drawer__text__mobile--space' : `${bgc} drawer__text__desktop--space`"></span>
         </NuxtLink>
     </div>
 </template>
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 const bgc = ref('bg-white')
 const route = useRoute()
-
+const props = defineProps(['showMenu'])
 watchEffect(() => {
     if(route.path == '/case-studies/remy-martin-x-lee-broom') {
         bgc.value = 'bg-[#F9B71B]'
@@ -35,7 +35,7 @@ watchEffect(() => {
 
 <style>
 .drawer__text__desktop--on {
-    @apply absolute left-[22px] w-16  transition-all duration-500 
+    @apply absolute left-[22px] w-16 transition-all duration-500 
     group-hover:left-[99px] group-hover:transition-all group-hover:duration-500 
     group-hover:ease-in-out ease-in-out group-hover:pl-1
 }
@@ -61,7 +61,7 @@ watchEffect(() => {
 }
 
 .drawer__text__desktop--space {
-    @apply absolute left-[46px] w-12 h-4  transition-all duration-500
+    @apply absolute left-[46px] w-12 h-4 transition-all duration-500
     group-hover:left-[177px] group-hover:transition-all group-hover:duration-500 
     group-hover:ease-in-out ease-in-out
 }

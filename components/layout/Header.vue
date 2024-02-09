@@ -1,25 +1,27 @@
 <template>
-    <div v-if="showMenu" :class="showMenu ? 'showAnimateMenu' : ''" class="bg-black text-white">
-        <MobileMenu :showMenu="showMenu" @send-audio-trigger="(input) => audioTrigger(input)" @send-show-menu="(input) => showMenu = input" />
+    <div :class="showMenu ? 'showAnimateMenu' : 'hideAnimateMenu'" class="bg-black text-white">
+        <MobileMenu :showMenu="showMenu" @send-audio-trigger="(input) => audioTrigger(input)" />
     </div>
-    <div ref="header" :class="[showMenu ? '' : 'hideAnimateMenu',`${bgc}`]" class="text-black relative flex items-center justify-between pl-6 pr-6">
-        <HeaderHome bgc="white" color="black" :afterBgc="false" />
-        <div class="">
-            <HeaderPlayer :is-vertical="false" @send-audio-trigger="audioTrigger" />
-        </div>
-        <div  class="md:flex items-center w-[500px] justify-between text-[14px] hidden ">
-            <div class="flex items-center gap-x-8">
-                <NuxtLink to="/studio" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Studio</NuxtLink>
-                <NuxtLink to="/case-studies" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Case studies</NuxtLink>
-                <NuxtLink to="/services" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Services</NuxtLink>
+    <div ref="header" :class="bgc" class="text-black relative px-6">
+        <div class="relative flex items-center justify-between z-10">
+            <HeaderHome :show-menu="showMenu" />
+            <div v-if="!showMenu">
+                <HeaderPlayer :is-vertical="false" @send-audio-trigger="(input) => audioTrigger(input)" />
             </div>
-            <div>
-                <NuxtLink to="/contact" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Contact</NuxtLink>
+            <div  class="md:flex items-center w-[500px] justify-between text-[14px] hidden ">
+                <div class="flex items-center gap-x-8">
+                    <NuxtLink to="/studio" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Studio</NuxtLink>
+                    <NuxtLink to="/case-studies" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Case studies</NuxtLink>
+                    <NuxtLink to="/services" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Services</NuxtLink>
+                </div>
+                <div>
+                    <NuxtLink to="/contact" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Contact</NuxtLink>
+                </div>
             </div>
-        </div>
-        <div  class="hamburgger__menu" @click="showMenu = true">
-            <div class="hamburgger__menu__firstChild"></div>
-            <div class="hamburgger__menu__secondChild"></div>
+            <div class="hamburgger__menu" @click="showMenu = !showMenu">
+                <div :class="showMenu ? 'bg-white' : 'bg-black'" class="hamburgger__menu__firstChild"></div>
+                <div :class="showMenu ? 'bg-white' : 'bg-black'" class="hamburgger__menu__secondChild"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -63,17 +65,17 @@ watchEffect(() => {
 
 <style>
 .hamburgger__menu {
-    @apply w-12 h-2 relative flex flex-col items-center justify-between cursor-pointer md:hidden
+    @apply w-12 h-2 relative z-20 flex flex-col items-center justify-between cursor-pointer md:hidden
 }
 .hamburgger__menu__firstChild {
-    @apply w-12 h-[1px] rounded-sm bg-black 
+    @apply w-12 h-[1px] rounded-sm 
 }
 .hamburgger__menu__secondChild {
-    @apply w-12 h-[1px] rounded-sm bg-black
+    @apply w-12 h-[1px] rounded-sm 
 }
 .showAnimateMenu {
     animation: showAnimateMenu forwards 0.3s 1 ease-in-out;
-    z-index: 100;
+    z-index: 10;
     position: fixed;
     left: 0;
     right: 0;
@@ -86,11 +88,16 @@ watchEffect(() => {
 
 .hideAnimateMenu {
     animation: hideAnimateMenu forwards 0.3s 1 ease-in-out;
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
 }
 
 @keyframes hideAnimateMenu {
-    from{height: 0;}
-    to{height: 3rem;}
+    to{height: 0;}
+    from{height: 100vh;}
 }
 .drawer__text__mobile--on {
     animation: move_on_text forwards 0.3s 1 ease-in;

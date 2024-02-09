@@ -1,33 +1,35 @@
 <template>
-    <div v-if="showMenu" :class="showMenu ? 'showAnimateMenu' : ''" class="bg-black text-white">
-        <MobileMenu :showMenu="showMenu" @send-audio-trigger="(input) => getAudioTrigger(input)" @send-show-menu="(input) => showMenu = input" />
+    <div :class="showMenu ? 'showAnimateMenu' : 'hideAnimateMenu'" class="bg-black text-white">
+        <MobileMenu :showMenu="showMenu" @send-audio-trigger="(input) => getAudioTrigger(input)" />
     </div>
-    <div ref="header" :class="showMenu ? '' : 'hideAnimateMenu'" class="bg-black text-white relative flex items-center justify-between pl-6 pr-6">
-        <NuxtLink to="/" class="relative font-bold text-[17px] group flex items-center py-1 ">
-            <span>PRESS</span>
-            <span class="drawer__text__desktop--play bg-black">PLAY</span>
-            <span class="drawer__text__desktop--on bg-black">
-                <span class="fill__desktop__o o bg-black">O</span>N
-            </span>
-            <span class="drawer__text__desktop--tape bg-black">TAPE</span>
-            <span class="drawer__text__desktop--space bg-black"></span>
-        </NuxtLink>
-        <div class="">
-            <HeaderPlayer :is-vertical="false" @send-audio-trigger="(input) => getAudioTrigger(input)" />
-        </div>
-        <div v-if="isHidden" class="flex items-center w-[500px] justify-between text-[14px]">
-            <div class="flex items-center gap-x-8">
-                <NuxtLink to="/studio" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Studio</NuxtLink>
-                <NuxtLink to="/case-studies" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Case studies</NuxtLink>
-                <NuxtLink to="/services" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Services</NuxtLink>
+    <div ref="header"  class="bg-black text-white relative px-6">
+        <div class="relative flex items-center justify-between">
+            <NuxtLink to="/" class="relative z-20 text-white font-bold text-[17px] group flex items-center py-1 ">
+                <span>PRESS</span>
+                <span :class="showMenu ? 'drawer__text__mobile--play' : 'drawer__text__desktop--play'" class="bg-black">PLAY</span>
+                <span :class="showMenu ? 'drawer__text__mobile--on' : 'drawer__text__desktop--on'" class="bg-black">
+                    <span :class="showMenu ? 'fill__mobile__o menu--o' : 'fill__desktop__o o'" class="bg-black">O</span>N
+                </span>
+                <span :class="showMenu ? 'drawer__text__mobile--tape' : 'drawer__text__desktop--tape'" class="bg-black">TAPE</span>
+                <span :class="showMenu ? 'drawer__text__mobile--space' : 'drawer__text__desktop--space'" class="bg-black"></span>
+            </NuxtLink>
+            <div v-if="!showMenu">
+                <HeaderPlayer :is-vertical="false" @send-audio-trigger="(input) => getAudioTrigger(input)" />
             </div>
-            <div>
-                <NuxtLink to="/contact" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Contact</NuxtLink>
+            <div class="md:flex items-center w-[500px] justify-between text-[14px] hidden">
+                <div class="flex items-center gap-x-8">
+                    <NuxtLink to="/studio" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Studio</NuxtLink>
+                    <NuxtLink to="/case-studies" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Case studies</NuxtLink>
+                    <NuxtLink to="/services" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Services</NuxtLink>
+                </div>
+                <div>
+                    <NuxtLink to="/contact" active-class="opacity-65" class="hover:opacity-65 transition-opacity duration-150">Contact</NuxtLink>
+                </div>
             </div>
-        </div>
-        <div v-else class="hamburgger__menu" @click="showMenu = true">
-            <div class="hamburgger__menu__firstChild"></div>
-            <div class="hamburgger__menu__secondChild"></div>
+            <div class="hamburgger__menu" @click="showMenu = !showMenu">
+                <div  class="hamburgger__menu__firstChild bg-white"></div>
+                <div  class="hamburgger__menu__secondChild bg-white"></div>
+            </div>
         </div>
     </div>
     <StickyMenu v-if="false" :isLargeEnough="isLargeEnough" @menuAudioTrigger="(input : any) => getMenuAudioTrigger(input)"  />
@@ -98,7 +100,6 @@
 import gsap from 'gsap'
 const emit = defineEmits(['audioTrigger', 'sendHeader'])
 const contact = ref()
-const isHidden = ref(false)
 const showMenu = ref(false)
 const header = ref<HTMLDivElement | null>(null)
 const {width} = useElementSize(header)
@@ -123,11 +124,9 @@ function getHeader(input : boolean) {
 watchEffect(() => {
     if(width.value > 800) {
         getHeader(true)
-        isHidden.value = true
         showMenu.value = false
     }else {
         getHeader(false)
-        isHidden.value = false
     }
 })
 

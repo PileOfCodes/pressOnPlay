@@ -1,8 +1,25 @@
 <template>
-    <div v-if="showMenu" :class="showMenu ? 'showAnimateMenu' : ''" class="bg-black text-white">
-        <MobileMenu :showMenu="showMenu" @send-audio-trigger="(input) => audioTrigger(input)" @send-show-menu="(input) => showMenu = input" />
+    <div :class="showMenu ? 'showAnimateMenu' : 'hideAnimateMenu'" class="bg-black text-white">
+        <div :class="showMenu ? '' : 'hidden' ">
+            <div class="relative flex items-center justify-between z-20 px-6 py-3">
+                <HeaderHome :show-menu="showMenu" />
+                <div class="hamburgger__menu" @click="showMenu = !showMenu">
+                    <div :class="showMenu ? 'bg-white' : 'bg-black'" class="hamburgger__menu__firstChild"></div>
+                    <div :class="showMenu ? 'bg-white' : 'bg-black'" class="hamburgger__menu__secondChild"></div>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-2 text-[52px] mt-8 px-6">
+                <NuxtLink to="/studio" active-class="opacity-65" class="hover:opacity-75 transition-opacity duration-150">Studio</NuxtLink>
+                <NuxtLink to="/case-studies" active-class="opacity-65" class="hover:opacity-75 transition-opacity duration-150">Case studies</NuxtLink>
+                <NuxtLink to="/services" active-class="opacity-65" class="hover:opacity-75 transition-opacity duration-150">Services</NuxtLink>
+                <NuxtLink to="/contact" active-class="opacity-65" class="hover:opacity-75 transition-opacity duration-150">Contacts</NuxtLink>
+            </div>
+            <div class="mt-20">
+                <HeaderPlayer :is-vertical="true" @send-audio-trigger="(input) => audioTrigger(input)" />
+            </div>
+        </div>
     </div>
-    <div v-else class="fixed top-0 z-[99] left-[50%] translate-x-[-50%] overflow-hidden h-[100px]" :class="[isHidden ? 'hideMenu' : '',showOnScroll ? 'showMenu' : 'hideMenu']">
+    <div class="fixed top-0 z-[99] left-[50%] translate-x-[-50%] overflow-hidden h-[100px]" :class="[isHidden ? 'hideMenu' : '',showOnScroll ? 'showMenu' : 'hideMenu', showMenu ? 'hideMenu' : '']">
         <div class="sideMenu">
             <svg preserveAspectRatio="none" viewBox="0 0 59 55" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M44.6973 8.17791L22.313 43.7756C17.9205 50.761 10.2475 55 1.99592 55H59.5V0C53.488 0 47.8976 3.08849 44.6973 8.17791Z" fill="white"></path></svg>
         </div>
@@ -25,9 +42,9 @@
                 <NuxtLink to="/services" class="hover:opacity-75 transition-opacity duration-150">Services</NuxtLink>
                 <NuxtLink to="/contact" class="hover:opacity-75 transition-opacity duration-150">Contacts</NuxtLink>
             </div>
-            <div v-else class="hamburgger__menu" @click="showMenu = true">
-                <div class="hamburgger__menu__firstChild"></div>
-                <div class="hamburgger__menu__secondChild"></div>
+            <div v-else class="hamburgger__menu" @click="showMenu = !showMenu">
+                <div  class="hamburgger__menu__firstChild bg-black"></div>
+                <div  class="hamburgger__menu__secondChild bg-black"></div>
             </div>
         </div>
         <div class="sideMenu sideMenu--inverse">
@@ -68,7 +85,7 @@ onMounted(() => {
 
 </script>
 
-<style>
+<style >
 #headerHome:hover {
     padding-right: 150px;
     transition: all 0.5s ease-in-out;
